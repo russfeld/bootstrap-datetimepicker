@@ -1096,13 +1096,19 @@
                     var hour = parseInt($(e.target).text(), 10);
 
                     if (!use24Hours) {
-                        if (date.hours() >= 12) {
-                            if (hour !== 12) {
-                                hour += 12;
+                        if(Object.keys(options.enabledHours).length <= 12){
+                            if(options.enabledHours[testDate.format('H')] !== true && hour <= 12){
+                                hour += 12 % 24;
                             }
-                        } else {
-                            if (hour === 12) {
-                                hour = 0;
+                        }else{
+                            if (date.hours() >= 12) {
+                                if (hour !== 12) {
+                                    hour += 12;
+                                }
+                            } else {
+                                if (hour === 12) {
+                                    hour = 0;
+                                }
                             }
                         }
                     }
