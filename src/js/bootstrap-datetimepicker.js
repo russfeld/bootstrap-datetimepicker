@@ -724,7 +724,7 @@
                     html = [],
                     row = $('<tr>');
 
-                if(options.enabledHours.length <= 12){
+                if(Object.keys(options.enabledHours).length <= 12){
                     var i = 0;
                     while (currentHour.isSame(viewDate, 'd')) {
                         if (currentHour.hour() % 4 === 0) {
