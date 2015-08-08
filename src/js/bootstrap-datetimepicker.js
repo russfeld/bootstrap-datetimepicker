@@ -1097,7 +1097,7 @@
 
                     if (!use24Hours) {
                         if(Object.keys(options.enabledHours).length <= 12){
-                            if(options.enabledHours[testDate.format('H')] !== true && hour <= 12){
+                            if(options.enabledHours[hour] !== true && hour <= 12){
                                 hour += 12 % 24;
                             }
                         }else{
