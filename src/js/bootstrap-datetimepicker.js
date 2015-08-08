@@ -724,16 +724,31 @@
                     html = [],
                     row = $('<tr>');
 
-                if (viewDate.hour() > 11 && !use24Hours) {
-                    currentHour.hour(12);
-                }
-                while (currentHour.isSame(viewDate, 'd') && (use24Hours || (viewDate.hour() < 12 && currentHour.hour() < 12) || viewDate.hour() > 11)) {
-                    if (currentHour.hour() % 4 === 0) {
-                        row = $('<tr>');
-                        html.push(row);
+                if(options.enabledHours.length <= 12){
+                    var i = 0;
+                    while (currentHour.isSame(viewDate, 'd')) {
+                        if (currentHour.hour() % 4 === 0) {
+                            row = $('<tr>');
+                            html.push(row);
+                        }
+                        if(isValid(currentHour, 'h'){
+                            row.append('<td data-action="selectHour" class="hour">' + currentHour.format(use24Hours ? 'HH' : 'hh') + '</td>');
+                            i++;
+                        }
+                        currentHour.add(1, 'h');
                     }
-                    row.append('<td data-action="selectHour" class="hour' + (!isValid(currentHour, 'h') ? ' disabled' : '') + '">' + currentHour.format(use24Hours ? 'HH' : 'hh') + '</td>');
-                    currentHour.add(1, 'h');
+                }else{
+                    if (viewDate.hour() > 11 && !use24Hours) {
+                        currentHour.hour(12);
+                    }
+                    while (currentHour.isSame(viewDate, 'd') && (use24Hours || (viewDate.hour() < 12 && currentHour.hour() < 12) || viewDate.hour() > 11)) {
+                        if (currentHour.hour() % 4 === 0) {
+                            row = $('<tr>');
+                            html.push(row);
+                        }
+                        row.append('<td data-action="selectHour" class="hour' + (!isValid(currentHour, 'h') ? ' disabled' : '') + '">' + currentHour.format(use24Hours ? 'HH' : 'hh') + '</td>');
+                        currentHour.add(1, 'h');
+                    }
                 }
                 table.empty().append(html);
             },
