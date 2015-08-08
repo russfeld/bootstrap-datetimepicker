@@ -731,7 +731,7 @@
                             row = $('<tr>');
                             html.push(row);
                         }
-                        if(isValid(currentHour, 'h'){
+                        if(isValid(currentHour, 'h')){
                             row.append('<td data-action="selectHour" class="hour">' + currentHour.format(use24Hours ? 'HH' : 'hh') + '</td>');
                             i++;
                         }
