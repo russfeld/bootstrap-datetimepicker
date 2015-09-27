@@ -540,6 +540,12 @@
                         return false;
                     }
                 }
+                if (options.maxHour && granularity === 'm'){
+                    var maxTimeMoment = targetMoment.clone().hour(options.maxHour).minute(0);
+                    if(targetMoment.isAfter(maxTimeMoment)){
+                        return false;
+                    }
+                }
                 return true;
             },
 
@@ -2267,6 +2273,12 @@
             return picker;
         };
 
+        picker.maxHour = function(maxHour){
+            if (arguments.length === 0){
+                return options.maxHour;
+            }
+        }
+
         // initializing element and component attributes
         if (element.is('input')) {
             input = element;
@@ -2501,6 +2513,7 @@
         disabledTimeIntervals: false,
         disabledHours: false,
         enabledHours: false,
+        maxHour: false,
         viewDate: false
     };
 }));
