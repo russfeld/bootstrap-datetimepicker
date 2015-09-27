@@ -540,8 +540,9 @@
                         return false;
                     }
                 }
-                if (options.maxHour && granularity === 'm'){
-                    var maxTimeMoment = targetMoment.clone().hour(options.maxHour).minute(0);
+                if (options.maxHour && (granularity === 'm' || granularity === 'h')){
+                    var maxTimeMoment = targetMoment.clone()
+                    maxTimeMoment = maxTimeMoment.hour(options.maxHour).startOf('h');
                     if(targetMoment.isAfter(maxTimeMoment)){
                         return false;
                     }
@@ -1118,7 +1119,11 @@
                             }
                         }
                     }
-                    setValue(date.clone().hours(hour));
+                    if(options.maxHour && hour === options.maxHour){
+                        setValue(date.clone().hours(hour).minutes(0));
+                    }else{
+                        setValue(date.clone().hours(hour));
+                    }
                     actions.showPicker.call(picker);
                 },
 
